@@ -3,24 +3,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Model
+class User extends Authenticatable
 {
-    use HasFactory;
-    protected $fillable = [
-        'username',
-        'email',
-        'password',
-    ];
+    use HasFactory, Notifiable;
 
-   public function categorias()
-{
-    return $this->hasMany(Categoria::class);
-}
+    protected $fillable = ['name', 'email', 'password'];
 
-public function produtos()
-{
-    return $this->hasMany(Produto::class);
-}
+    protected $hidden = ['password', 'remember_token'];
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

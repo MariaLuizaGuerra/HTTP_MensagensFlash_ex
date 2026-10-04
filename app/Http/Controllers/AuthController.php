@@ -3,63 +3,40 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-        public function login()
+    public function showLogin()
     {
-        return view('login');
+        return view('auth.login');
     }
-    public function loginSubmit(Request $request)
-{
-    $request->validate([
-        'text_username' => 'required|email',
-        'text_password' => 'required|min:6',
-    ], [
-        'text_username.required' => 'O e-mail é obrigatório.',
-        'text_username.email' => 'Digite um e-mail válido.',
-        'text_password.required' => 'A senha é obrigatória.',
-        'text_password.min' => 'A senha deve ter no mínimo 6 caracteres.',
-    ]);
 
-    $email = $request->text_username;
-    $password = $request->text_password;
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-    $user = User::where('email', $email)
-                ->whereNull('deleted_at')
-                ->first();
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
+            $request->session()->regenerate(); // evita session fixation
 
-    if (!$user || !password_verify($password, $user->password)) {
+            return redirect()->intended(route('tasks.index'))
+                ->with('success', 'Login realizado com sucesso!');
+        }
+
         return back()
-            ->withInput()
-            ->with('login_error', 'E-mail ou senha incorretos!');
+            ->withInput($request->only('email'))
+            ->with('error', 'Credenciais inválidas.');
     }
 
-    $user->last_login = now();
-    $user->save();
-
-    session([
-        'user' => [
-            'id' => $user->id,
-            'username' => $user->username,
-        ]
-    ]);
-
-    return redirect()->route('home');
-}
-    public function create(){
-        return 'Criando usuario';
-    }
-
-    
-    public function logout()
+    public function logout(Request $request)
     {
-        session()->forget('user');
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()->route('login')->with('info', 'Você saiu da sua conta.');
     }
-
-
 }

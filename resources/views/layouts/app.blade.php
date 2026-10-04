@@ -1,26 +1,30 @@
-<!DOCTYPE html>
-<html lang='pt-br'>
+<!doctype html>
+<html lang="pt-BR">
 <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>@yield('title') | Sistema de Vendas</title>
-
-    <link rel='icon' type='image/svg+xml' href='{{ asset('assets/images/favicon.svg') }}'>
-    <link rel='alternate icon' href='{{ asset('favicon.ico') }}'>
-
-    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet'>
-    <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css' rel='stylesheet'>
-    <link rel='stylesheet' href='{{ asset('css/style.css') }}'>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tarefas - Sessões e Flash</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class='bg-light'>
+<body class="container py-4" style="max-width: 760px;">
+    @auth
+        <nav class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <a href="{{ route('tasks.index') }}" class="me-3">Tarefas</a>
+                <a href="{{ route('sessao') }}">Ver sessão</a>
+            </div>
+            <form method="POST" action="{{ route('logout') }}" class="d-flex align-items-center gap-2">
+                @csrf
+                <span class="text-muted small">{{ auth()->user()->name }}</span>
+                <button class="btn btn-sm btn-outline-secondary">Sair</button>
+            </form>
+        </nav>
+    @endauth
 
-    @include('layouts.includes.navbar')
+    <x-flash />
 
-    <main class='container py-4'>
-        @include('layouts.includes.alerts')
-        @yield('content')
-    </main>
+    @yield('content')
 
-    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
