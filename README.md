@@ -20,17 +20,11 @@ Um app de lista de tarefas em Laravel que mostra, na prática, como funcionam as
 
 **Como rodar:**
 
-1.
-composer install
-copy .env.example .env
-php artisan key:generate
+1. composer install / copy .env.example .env / php artisan key:generate
 
-2.
-Configure o banco no .env (DB_DATABASE, DB_USERNAME, DB_PASSWORD):
+2. Configure o banco no .env (DB_DATABASE, DB_USERNAME, DB_PASSWORD):
 
-4.
-php artisan migrate:fresh --seed /
-php artisan serve 
+4. php artisan migrate:fresh --seed / php artisan serve 
 
 Acesse http://127.0.0.1:8000.
 
