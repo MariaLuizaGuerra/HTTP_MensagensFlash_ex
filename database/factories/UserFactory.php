@@ -18,12 +18,12 @@ class UserFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {
-        return [
-            'username' => fake()->userName(),
-            'email' => fake()->unique()->safeEmail(),
-            'password' => static::$password ??= Hash::make('password'), 
-
-        ];
-    }
+{
+    return [
+        'name' => fake()->name(),
+        'username' => fake()->userName(),
+        'email' => fake()->unique()->safeEmail(),
+        'password' => static::$password ??= Hash::make('password'),
+    ];
+}
 }

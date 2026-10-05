@@ -45,8 +45,11 @@ class TaskController extends Controller
 
     public function destroy(string $id)
     {
-        auth()->user()->tasks()->findOrFail($id)->delete();
+        
+    auth()->user()->tasks()->where('id', $id)->delete();
 
-        return redirect()->route('tasks.index')->with('warning', 'Tarefa removida.');
+    return redirect()->route('tasks.index')->with('warning', 'Tarefa removida.');
+    
     }
+    
 }

@@ -8,17 +8,26 @@
 </head>
 <body class="container py-4" style="max-width: 760px;">
     @auth
-        <nav class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-                <a href="{{ route('tasks.index') }}" class="me-3">Tarefas</a>
-                <a href="{{ route('sessao') }}">Ver sessão</a>
-            </div>
-            <form method="POST" action="{{ route('logout') }}" class="d-flex align-items-center gap-2">
-                @csrf
-                <span class="text-muted small">{{ auth()->user()->name }}</span>
-                <button class="btn btn-sm btn-outline-secondary">Sair</button>
-            </form>
-        </nav>
+        @auth
+    <nav class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex gap-2">
+            <a href="{{ route('tasks.index') }}"
+               @class(['btn btn-sm', 'btn-primary' => request()->routeIs('tasks.*'), 'btn-outline-primary' => !request()->routeIs('tasks.*')])>
+                Tarefas
+            </a>
+            <a href="{{ route('sessao') }}"
+               @class(['btn btn-sm', 'btn-primary' => request()->routeIs('sessao'), 'btn-outline-primary' => !request()->routeIs('sessao')])>
+                Ver sessão
+            </a>
+        </div>
+
+        <form method="POST" action="{{ route('logout') }}" class="d-flex align-items-center gap-2">
+            @csrf
+            <span class="text-muted small">{{ auth()->user()->name }}</span>
+            <button class="btn btn-sm btn-outline-secondary">Sair</button>
+        </form>
+    </nav>
+@endauth
     @endauth
 
     <x-flash />

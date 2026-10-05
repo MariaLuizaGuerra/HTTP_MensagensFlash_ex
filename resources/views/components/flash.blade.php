@@ -4,5 +4,8 @@
             {{ session($type) }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
         </div>
+        <script>setTimeout(() => {
+        document.querySelectorAll('.alert').forEach(a => bootstrap.Alert.getOrCreateInstance(a).close());}, 4000);
+</script>
     @endif
 @endforeach

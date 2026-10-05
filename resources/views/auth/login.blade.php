@@ -26,6 +26,7 @@
         </div>
 
         <button class="btn btn-primary">Entrar</button>
-        <p class="text-muted small mt-3">Teste: teste@exemplo.com / password</p>
+        <p class="text-muted small mt-3"> Não tem conta? <a href="{{ route('register') }}">Criar conta</a>
+</p>
     </form>
 @endsection

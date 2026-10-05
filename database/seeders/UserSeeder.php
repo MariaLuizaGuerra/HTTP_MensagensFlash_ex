@@ -11,9 +11,9 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()->count(3)->create();
 
         DB::table('users')->insert([
+            'name' => 'Fulano',
             'username' => 'fulano',
             'email' => 'fulano@exemplo.com',
             'password' => bcrypt('teste123')
