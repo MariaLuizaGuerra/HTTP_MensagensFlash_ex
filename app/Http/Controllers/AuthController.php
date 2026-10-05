@@ -48,18 +48,16 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:50', 'unique:users,username'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'min:6', 'confirmed'],
-        ]);
+    $data = $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'username' => ['required', 'string', 'max:50', 'unique:users,username'],
+        'email' => ['required', 'email', 'unique:users,email'],
+        'password' => ['required', 'min:6', 'confirmed'],
+    ]);
 
-        $user = User::create($data);
+    User::create($data);
 
-        Auth::login($user);
-        $request->session()->regenerate();
-
-        return redirect()->route('tasks.index')->with('success', 'Conta criada com sucesso!');
+    return redirect()->route('login')
+        ->with('success', 'Conta criada! Faça login para entrar.');
     }
 }

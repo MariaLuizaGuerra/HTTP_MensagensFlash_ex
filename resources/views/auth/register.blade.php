@@ -7,14 +7,14 @@
         @csrf
 
         <div class="mb-3">
-            <label for="name" class="form-label">Nome</label>
+            <label for="name" class="form-label">Nome completo</label>
             <input type="text" id="name" name="name" value="{{ old('name') }}"
                    class="form-control @error('name') is-invalid @enderror" required autofocus>
             @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
 
         <div class="mb-3">
-            <label for="username" class="form-label">Usuário</label>
+            <label for="username" class="form-label">Nome de Usuário</label>
             <input type="text" id="username" name="username" value="{{ old('username') }}"
                    class="form-control @error('username') is-invalid @enderror" required>
             @error('username') <div class="invalid-feedback">{{ $message }}</div> @enderror
