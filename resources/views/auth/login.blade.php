@@ -20,11 +20,6 @@
             @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
 
-        <div class="form-check mb-3">
-            <input type="checkbox" class="form-check-input" id="remember" name="remember" value="1">
-            <label class="form-check-label" for="remember">Manter conectado</label>
-        </div>
-
         <button class="btn btn-primary">Entrar</button>
         <p class="text-muted small mt-3"> Não tem conta? <a href="{{ route('register') }}">Criar conta</a>
 </p>

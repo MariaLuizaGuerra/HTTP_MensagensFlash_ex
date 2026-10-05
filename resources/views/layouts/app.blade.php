@@ -15,10 +15,6 @@
                @class(['btn btn-sm', 'btn-primary' => request()->routeIs('tasks.*'), 'btn-outline-primary' => !request()->routeIs('tasks.*')])>
                 Tarefas
             </a>
-            <a href="{{ route('sessao') }}"
-               @class(['btn btn-sm', 'btn-primary' => request()->routeIs('sessao'), 'btn-outline-primary' => !request()->routeIs('sessao')])>
-                Ver sessão
-            </a>
         </div>
 
         <form method="POST" action="{{ route('logout') }}" class="d-flex align-items-center gap-2">

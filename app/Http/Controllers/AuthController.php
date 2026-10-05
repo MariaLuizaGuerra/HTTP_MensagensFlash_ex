@@ -21,10 +21,9 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            $request->session()->regenerate(); // evita session fixation
-
-            return redirect()->intended(route('tasks.index'))
-                ->with('success', 'Login realizado com sucesso!');
+            $request->session()->regenerate(); 
+            session()->flash('success', 'Logado com sucesso!');
+            return redirect()->route('tasks.index');
         }
 
         return back()
@@ -61,3 +60,12 @@ class AuthController extends Controller
         ->with('success', 'Conta criada! Faça login para entrar.');
     }
 }
+
+
+// Forma 1: explícita
+//session()->flash('success', 'Tarefa criada!');
+//return redirect()->route('tasks.index');
+
+// Forma 2: atalho no redirect (a que usamos no projeto)
+//return redirect()->route('tasks.index')
+//    ->with('success', 'Tarefa criada!');
