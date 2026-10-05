@@ -26,16 +26,16 @@ copy .env.example .env
 php artisan key:generate
 
 2.
-Configure o banco no .env (DB_DATABASE, DB_USERNAME, DB_PASSWORD) e depois:
+Configure o banco no .env (DB_DATABASE, DB_USERNAME, DB_PASSWORD):
 
 4.
-php artisan migrate:fresh --seed
-php artisan serve
+php artisan migrate:fresh --seed /
+php artisan serve 
 
 Acesse http://127.0.0.1:8000.
 
 Usuário de teste: 
-email: fulano@exemplo.com 
+email: fulano@exemplo.com /
 senha: teste123
 
 Estrutura principal
